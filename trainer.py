@@ -80,7 +80,10 @@ def set_gradient_csv(gradient):
 def convert_data(val):
     maximum = max(val)
     minimum = min(val)
-    return [(_ - minimum) / (maximum - minimum) for _ in val]
+    if maximum - minimum:
+        return [(_ - minimum) / (maximum - minimum) for _ in val]
+    return [(_ - minimum) for _ in val]
+
 
 def gradient_descent(x, y, gradient):
     cpt = 0
