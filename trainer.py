@@ -128,20 +128,23 @@ def main():
         error('Not able to analyze gradient descent')
         sys.exit(1)
     set_gradient_csv(gradient)
-    try:
+    # try:
+    if True:
         if options.history:
             accuracy = []
             for hist in history:
                 accuracy.append(sum([math.fabs(raw_estimated_price(hist[0], _, hist[1]) - y[i]) for i, _ in enumerate(x)]))
-
-            plt.plot([_ for _ in range(0, len(accuracy))], accuracy, 'r--', label='Precision')
+            # print(accuracy)
+            # print([_ for _ in range(0, len(accuracy))])
+            # plt.plot([_ for _ in range(0, len(accuracy))], accuracy, 'r--', label='Precision')
+            plt.plot(accuracy, 'r--', label='Precision')
             plt.ylabel('Price differential')
             plt.xlabel('time')
             plt.grid(True)
             plt.title('Price differential = f(time)')
             plt.show()
-    except:
-        error('Not able to display data')
+    # except:
+    #     error('Not able to display data')
 
 if __name__ == '__main__':
     main()

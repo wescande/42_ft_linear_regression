@@ -43,7 +43,11 @@ def get_data_csv():
         print('Unable to analyze data.csv')
         sys.exit(1)
     global mile_lim
+    global mile_delta
     mile_lim = [min(x), max(x)]
+    mile_delta = mile_lim[1] - mile_lim[0]
+    if not mile_delta:
+        mile_delta = 1
     global price_lim
     price_lim = [min(y), max(y)]
     return x, y
@@ -52,5 +56,5 @@ def raw_estimated_price(a, x, b):
     return a * x + b
 
 def estimated_price(a, x, b):
-    price_ranged = raw_estimated_price(a, (x - mile_lim[0]) / (mile_lim[1] - mile_lim[0]), b)
+    price_ranged = raw_estimated_price(a, (x - mile_lim[0]) / mile_delta, b)
     return price_ranged * (price_lim[1] - price_lim[0]) + price_lim[0]
